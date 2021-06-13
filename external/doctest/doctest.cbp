@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="doctest"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;CMake Files\external\;CMake Files\external\doctest\;CMake Files\external\nana\;CMake Files\external\nana\build\;CMake Files\external\nana\build\cmake\;CMake Files\external\nana\build\cmake\Modules\;CMake Files\src\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doctest">
+				<Option output="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/libdoctest.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 doctest"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="doctest/fast">
+				<Option output="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/libdoctest.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 doctest/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/doctest.cpp">
+			<Option target="doctest"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/doctest.h">
+			<Option target="doctest"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/cmake/CompilerWarnings.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/cmake/StandardProjectSettings.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\doctest\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/doctest/doctest.cmake">
+			<Option virtualFolder="CMake Files\external\doctest\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\external\nana\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/OS.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/compilers.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/enable_audio.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/enable_jpeg.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/enable_png.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/install_nana.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/select_filesystem.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/shared_libs.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/verbose.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/external/nana/build/cmake/Modules/FindFontconfig.cmake">
+			<Option virtualFolder="CMake Files\external\nana\build\cmake\Modules\"/>
+		</Unit>
+		<Unit filename="/home/kira/CLionProjects/CryptoTrade/cpp-starter-project-master/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
