@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10.0)
 
-project(Homework CXX)
+project(CryptoTrade)
+
+add_executable(CryptoTrade cryptotrade.cxx)
+
 set(CMAKE_CXX_STANDARD 17)
 include(cmake/StandardProjectSettings.cmake)
 # Link this 'library' to set the c++ standard / compile-time options requested
@@ -11,6 +14,8 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(default)
 
 enable_testing()
+add_subdirectory(external/nana EXCLUDE_FROM_ALL)
 add_subdirectory(external/doctest)
 include(external/doctest/doctest.cmake)
 add_subdirectory(src)
+
