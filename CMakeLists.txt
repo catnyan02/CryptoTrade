@@ -22,6 +22,11 @@ add_subdirectory(external/nana EXCLUDE_FROM_ALL)
 include(external/doctest/doctest.cmake)
 add_subdirectory(src)
 
+#set(DOXYGEN_GENERATE_XML, YES)
+#set(DOXYGEN_HTML_EXTRA_STYLESHEET doxygen-awesome.css)
+#find_package(Doxygen)
+#doxygen_add_docs(Doxygen src)
+
 # Так как VSCode любит при запуске неправильно указывать текущий каталог,
 # мы создаём ссылку на каталог resources рядом с исполняемыми файлами
 # file(CREATE_LINK "${CMAKE_CURRENT_SOURCE_DIR}/resources" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources" COPY_ON_ERROR SYMBOLIC)
