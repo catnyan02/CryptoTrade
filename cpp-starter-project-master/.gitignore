@@ -5,3 +5,5 @@
 /compile_commands.json
 /.vs
 /cmake-build-*
+external
+Testing
