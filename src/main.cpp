@@ -4,43 +4,38 @@
 
 float INITIAL_BALANCE = 1000000;
 
-double float COIN_CAP_0 = 245125425,75;
-double float COIN_CAP_1 = 547241254,67;
-double float COIN_CAP_2 = 668500347021,10;
-double float COIN_CAP_3 = 274003657734,54;
-double float COIN_CAP_4 = 40488480660,85;
-double float COIN_CAP_5 = 648753313,34;
-double float COIN_CAP_6 = 137155221,42;
+double COIN_CAP_0 = 245125425.75;
+double COIN_CAP_1 = 547241254.67;
+double COIN_CAP_2 = 668500347021.10;
+double COIN_CAP_3 = 274003657734.54;
+double COIN_CAP_4 = 40488480660.85;
+double COIN_CAP_5 = 648753313.34;
+double COIN_CAP_6 = 137155221.42;
 
-double float COIN_SUP_0 = 24512;
-double float COIN_SUP_1 = 745224;
-double float COIN_SUP_2 = 18733637;
-double float COIN_SUP_3 = 116269232;
-double float COIN_SUP_4 = 130007902538;
-double float COIN_SUP_5 = 8981290000;
-double float COIN_SUP_6 = 110551965;
+double COIN_SUP_0 = 24512;
+double COIN_SUP_1 = 745224;
+double COIN_SUP_2 = 18733637;
+double COIN_SUP_3 = 116269232;
+double COIN_SUP_4 = 130007902538;
+double COIN_SUP_5 = 8981290000;
+double COIN_SUP_6 = 110551965;
 
 
 auto crypto_currency::daily_fluctuations() -> bool{
     std::experimental::reseed();
-    int range_max_cap = market_cap * 0.1;
+    int range_max_cap = static_cast<int>(market_cap * 0.1);
     std::experimental::reseed();
-    int range_max_sup = coin_sup * 0.01;
+    int range_max_sup = static_cast<int>(circulating_sup * 0.01);
     int random_cap = std::experimental::randint(0, range_max_cap);
     int random_sup = std::experimental::randint(0, range_max_sup);
     int fall_or_rise = (-1)^(random_sup);
-    market_cap += random_number * fall_or_rise;
+    market_cap += random_cap * fall_or_rise;
     circulating_sup += random_sup;  //missing formula to change circulating supply
-    if (market_cap >= 0 and circulating_sup >=0){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return (market_cap >= 0 and circulating_sup >=0);
 }
 
 auto crypto_currency::count_value() -> float{
-    float value = market_cap / circulating_sup;
+    auto value = static_cast<float>(market_cap / circulating_sup);
     return value;
 }
 
@@ -54,43 +49,35 @@ auto crypto_currency::init_fluctuations() -> bool{
         update_values(value);
         daily_fluctuations();
     }
-    if (daily_values.size() == 7){
-        return true;
-    } else{
-        return false;
-    }
+    return daily_values.size() == 7;
 }
 
-auto crypto_balance::coin_name(int coin_number) -> std::string{
+auto crypto_balance::coin_name(unsigned int coin_number) -> std::string{
     if (coin_number < coins.size()){
         return coins[coin_number].coin_name;
     }
-    else{
-        return "error";
-    }
+            return "error";
+
 }
 
-auto crypto_balance::add_coins(int coin, float val) -> void{
+auto crypto_balance::add_coins(unsigned int coin, float val) -> bool{
     if (coin < coins.size()){
-        balance_by_coin[coin_number] += val;
+        balance_by_coin[coin] += val;
         return true;
-    } else{
-        return false;
-    }
+    }         return false;
+
 }
 
-auto crypto_balance::withdraw_coins(int coin, float val) -> bool{
+auto crypto_balance::withdraw_coins(unsigned int coin, float val) -> bool{
     if (coin < coins.size()){
-        auto current_balance = balance_by_coin[coin_number];
+        auto current_balance = balance_by_coin[coin];
         if (current_balance >= val){
-            balance_by_coin[coin_number] -= val;
+            balance_by_coin[coin] -= val;
             return true;
-        } else{
-            return false
-        }
-    } else{
-        return false;
-    }
+        }             return false;
+
+    }         return false;
+
 }
 
 auto user::next_day() -> void{
@@ -103,63 +90,60 @@ auto user::next_day() -> void{
 
 }
 
-auto user::current_value(int coin) -> float{
-    if (coin_number < wallet.coins.size()){
-        int day_of_metrics = 6 + day;
-        return wallet.coins[coin_number].daily_values[day_of_metrics];
+auto user::current_value(unsigned int coin) -> float{
+    if (coin < wallet.coins.size()){
+        auto day_of_metrics = 6 + day;
+        return wallet.coins[coin].daily_values[day_of_metrics];
     }
-    else{
-        return -1;
-    }
+            return -1;
+
 }
 
-auto user::add_coins(int coin, float val) -> bool{
+auto user::add_coins(unsigned int coin, float val) -> bool{
     auto coin_value = current_value(coin);
     float purchase_value = coin_value * val;
     if (balance >= purchase_value){
         balance -= purchase_value;
         wallet.add_coins(coin, val);
         return true;
-    } else{
-        return false;
-    }
+    }         return false;
+
 }
 
-auto user::withdraw_coins(int coin, float val) -> bool{
+auto user::withdraw_coins(unsigned int coin, float val) -> bool{
     if (wallet.withdraw_coins(coin, val)){
         auto coin_value = current_value(coin);
         balance += coin_value * val;
         return true;
-    }else{
-        return false;
-    }
+    }        return false;
+
 }
 
 auto user::count_profit() -> float{
     for ( int i=0; i < 7; i++){
-        to_withdraw = wallet.balance_by_coin[i];
+        float to_withdraw = wallet.balance_by_coin[i];
         withdraw_coins(i, to_withdraw);
     }
-    profit = balance - INITIAL_BALANCE
+    float profit = balance - INITIAL_BALANCE;
+    return profit;
 }
 
 auto user::score() -> std::string{
     auto profit = count_profit();
     if (profit <= 0) {
         return "Failure!";
-    } else if (profit/INITIAL_BALANCE <= 0.25) {
+    } if (profit/INITIAL_BALANCE <= 0.25) {
         return "Not bad...";
-    } else if (profit/INITIAL_BALANCE <= 0.50) {
+    } if (profit/INITIAL_BALANCE <= 0.50) {
         return "Good.";
-    } else if (profit/INITIAL_BALANCE < 1) {
+    } if (profit/INITIAL_BALANCE < 1) {
         return "Excellent!";
-    } else {
-        return "Expert!!!";
-    }
+    }         return "Expert!!!";
+
 
 }
 
-auto user::end_of_the_week() -> bool;{
+auto user::end_of_the_week() -> bool{
 
 }
 
