@@ -1,28 +1,36 @@
 #include "lib.hpp"
 #include <iostream>
+#include <experimental/random>
 
-float INITIAL_BALANCE = 1000;
+float INITIAL_BALANCE = 1000000;
 
-float COIN_CAP_0 = ;
-float COIN_CAP_1 = ;
-float COIN_CAP_2 = ;
-float COIN_CAP_3 = ;
-float COIN_CAP_4 = ;
-float COIN_CAP_5 = ;
-float COIN_CAP_6 = ;
+double float COIN_CAP_0 = 245125425,75;
+double float COIN_CAP_1 = 547241254,67;
+double float COIN_CAP_2 = 668500347021,10;
+double float COIN_CAP_3 = 274003657734,54;
+double float COIN_CAP_4 = 40488480660,85;
+double float COIN_CAP_5 = 648753313,34;
+double float COIN_CAP_6 = 137155221,42;
 
-float COIN_SUP_0 = ;
-float COIN_SUP_1 = ;
-float COIN_SUP_2 = ;
-float COIN_SUP_3 = ;
-float COIN_SUP_4 = ;
-float COIN_SUP_5 = ;
-float COIN_SUP_6 = ;
+double float COIN_SUP_0 = 24512;
+double float COIN_SUP_1 = 745224;
+double float COIN_SUP_2 = 18733637;
+double float COIN_SUP_3 = 116269232;
+double float COIN_SUP_4 = 130007902538;
+double float COIN_SUP_5 = 8981290000;
+double float COIN_SUP_6 = 110551965;
 
 
 auto crypto_currency::daily_fluctuations() -> bool{
-    market_cap += ;  //missing formula to change market cap
-    circulating_sup += ;  //missing formula to change circulating supply
+    std::experimental::reseed();
+    int range_max_cap = market_cap * 0.1;
+    std::experimental::reseed();
+    int range_max_sup = coin_sup * 0.01;
+    int random_cap = std::experimental::randint(0, range_max_cap);
+    int random_sup = std::experimental::randint(0, range_max_sup);
+    int fall_or_rise = (-1)^(random_sup);
+    market_cap += random_number * fall_or_rise;
+    circulating_sup += random_sup;  //missing formula to change circulating supply
     if (market_cap >= 0 and circulating_sup >=0){
         return true;
     }
@@ -136,6 +144,18 @@ auto user::count_profit() -> float{
 }
 
 auto user::score() -> std::string{
+    auto profit = count_profit();
+    if (profit <= 0) {
+        return "Failure!";
+    } else if (profit/INITIAL_BALANCE <= 0.25) {
+        return "Not bad...";
+    } else if (profit/INITIAL_BALANCE <= 0.50) {
+        return "Good.";
+    } else if (profit/INITIAL_BALANCE < 1) {
+        return "Excellent!";
+    } else {
+        return "Expert!!!";
+    }
 
 }
 

@@ -5,8 +5,8 @@
 
 struct crypto_currency{
     std::string coin_name;
-    float market_cap;
-    float circulating_sup;
+    double float market_cap;
+    double float circulating_sup;
     std::vector<float> daily_values;
 
     auto daily_fluctuations() -> bool; //changes market_cap and circulating_sup of a coin
