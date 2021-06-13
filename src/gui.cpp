@@ -3,23 +3,53 @@
 //
 
 #include "gui.hpp"
+#include <fmt/core.h>
+#include <nana/gui.hpp>
+#include <nana/gui/widgets/button.hpp>
+#include <nana/gui/widgets/label.hpp>
 
 int main()
 {
-    //All names of Nana is in the namespace nana;
     using namespace nana;
-    //Define a form object, class form will create a window
-    //when a form instance is created.
-    //The new window default visibility is false.
+
+    // Define a form.
     form fm;
-    //Define a label on the fm(form) with a specified area,
-    //and set the caption.
-    label lb{ fm, rectangle{ 10, 10, 100, 100 } };
-    lb.caption("Hello, world!");
-    //Expose the form.
+    int a = 0;
+    auto text = [&a] {
+        return fmt::format(
+            "Hello, <bold blue size=16>Nana C++ Library</>, num = {}\n", a);
+    };
+
+    // Define a label and display a text.
+    label lab{fm, text()};
+    lab.format(true);
+
+    // Define a button and answer the click event.
+    button btn{fm, "Quit"};
+    btn.events().click([&fm] { fm.close(); });
+
+    button inc{fm, "++"};
+    inc.events().click([&] {
+        ++a;
+        lab.caption(text());
+    });
+
+    // Layout management
+    fm.div("vert <>"
+           "<<><weight=80% text><>>"
+           "<>"
+           "<<><weight=50%<img2>><>>"
+           "<>"
+           "<weight=24<><button><>>"
+           "<>");
+    fm["text"] << lab;
+    fm["button"] << btn;
+    fm["button"] << inc;
+    fm.collocate();
+
+    // Show the form
     fm.show();
-    //Pass the control of the application to Nana's event
-    //service. It blocks the execution for dispatching user
-    //input until the form is closed.
+
+    // Start to event loop process, it blocks until the form is closed.
     exec();
 }

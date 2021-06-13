@@ -6,5 +6,3 @@
 #define CRYPTOTRADE_GUI_HPP
 
 #endif //CRYPTOTRADE_GUI_HPP
-
-#include <nana/gui.hpp>
