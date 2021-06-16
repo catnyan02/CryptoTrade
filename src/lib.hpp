@@ -46,5 +46,5 @@ struct user {
     auto withdraw_coins(unsigned int coin, float val) -> bool; ///< sells chosen coin and withdraws it from the wallet
     auto count_profit() -> float; ///< counts profit
     auto score() -> std::string; ///< counts user's (player's) score
-    auto end_of_the_week() -> bool; ///< generates information for last day week recap
+    auto end_of_the_week() -> std::vector<std::string>; ///< generates information for last day week recap
 };

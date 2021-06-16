@@ -141,12 +141,15 @@ auto user::score() -> std::string{
         return "Excellent!";
     }         return "Expert!!!";
 
-
 }
 
-//auto user::end_of_the_week() -> bool{
-//
-//}
+auto user::end_of_the_week() -> std::vector<std::string>{
+    auto days = std::to_string(day);
+    auto profit = std::to_string(count_profit());
+    auto result = score();
+    std::vector<std::string> end_results {days,  profit, result};
+    return end_results;
+}
 
 
 //int main() {
