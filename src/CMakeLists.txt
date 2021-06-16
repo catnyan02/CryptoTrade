@@ -1,7 +1,39 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(CryptoTrade)
-include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
-auto_tester(src main.cpp test.cpp)
+
+# --- Fetch FTXUI --------------------------------------------------------------
+include(FetchContent)
+ 
+set(FETCHCONTENT_UPDATES_DISCONNECTED TRUE)
+FetchContent_Declare(ftxui
+  GIT_REPOSITORY https://github.com/ArthurSonzogni/ftxui
+  # Specify a GIT_TAG here.
+)
+ 
+FetchContent_GetProperties(ftxui)
+if(NOT ftxui_POPULATED)
+  FetchContent_Populate(ftxui)
+  add_subdirectory(${ftxui_SOURCE_DIR} ${ftxui_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+ 
+ 
+ 
+
+ 
+# C++17 is used. We requires fold expressions at least.
+add_executable(proj_test test.cpp lib.cpp)
+add_executable(proj main.cpp lib.cpp)
+target_link_libraries(proj_test PUBLIC doctest::doctest)
+target_link_libraries(proj
+  PRIVATE ftxui::screen
+  PRIVATE ftxui::dom
+  PRIVATE ftxui::component # Not needed for this example.
+)
+target_link_libraries(proj PUBLIC doctest::doctest)
+doctest_discover_tests(proj_test)
+
+# include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
+# auto_tester(src main.cpp test.cpp)
 
 #for gtkmm
 #link_directories(
