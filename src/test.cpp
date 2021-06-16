@@ -1,6 +1,7 @@
 #include "catch.hpp"
 #include "lib.hpp"
 
+
 crypto_currency coin {"coin", 139187392.21, 2903870};
 crypto_balance wallet {std::vector<crypto_currency> {coin}, {300}};
 user new_user{wallet, 1000000, 0};
@@ -24,17 +25,21 @@ TEST_CASE("Withdraw Coins to Crypto Balance Works") {
 }
 
 TEST_CASE("User Can Buy Coins") {
+    new_user.wallet.coins[0].init_fluctuations();
     REQUIRE(new_user.add_coins(0, 10) == true);
 }
 
 TEST_CASE("User Cannot Buy More Coins Than He Has Money") {
+    new_user.wallet.coins[0].daily_fluctuations();
     REQUIRE(new_user.add_coins(0, 1000000000) == false);
 }
 
 TEST_CASE("User Can Withdraw Coins") {
+    new_user.wallet.coins[0].daily_fluctuations();
     REQUIRE(new_user.withdraw_coins(0, 1) == true);
 }
 
 TEST_CASE("User Cannot Withdraw More Coins Than He Has") {
+    new_user.wallet.coins[0].daily_fluctuations();
     REQUIRE(new_user.withdraw_coins(0, 10000000000) == false);
 }

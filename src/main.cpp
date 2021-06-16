@@ -93,9 +93,10 @@ auto user::next_day() -> void{
 auto user::current_value(unsigned int coin) -> float{
     if (coin < wallet.coins.size()){
         auto day_of_metrics = 6 + day;
-        return wallet.coins[coin].daily_values[day_of_metrics];
+        auto coin_to_evaluate = wallet.coins[coin];
+        return coin_to_evaluate.daily_values[day_of_metrics];
     }
-            return -1;
+            return -1,01;
 
 }
 
@@ -143,21 +144,21 @@ auto user::score() -> std::string{
 
 }
 
-auto user::end_of_the_week() -> bool{
+//auto user::end_of_the_week() -> bool{
+//
+//}
 
-}
 
-
-int main() {
-    crypto_balance user_balance {{
-                                     {"krsch_coin", COIN_CAP_0, COIN_SUP_0},
-                                        {"kzmnv_coin", COIN_CAP_1, COIN_SUP_1},
-                                           {"bitcoin", COIN_CAP_2, COIN_SUP_2},
-                                              {"etherium", COIN_CAP_3, COIN_SUP_3},
-                                                 {"dogecoin", COIN_CAP_4, COIN_SUP_4},
-                                                    {"ravencoin", COIN_CAP_5, COIN_SUP_5},
-                                                       {"dodo", COIN_CAP_6, COIN_SUP_6}
-                                 }, {0, 0, 0, 0, 0, 0, 0}};
-    user new_user {user_balance, INITIAL_BALANCE, 0};
-    return 0;
-}
+//int main() {
+//    crypto_balance user_balance {{
+//                                     {"krsch_coin", COIN_CAP_0, COIN_SUP_0},
+//                                        {"kzmnv_coin", COIN_CAP_1, COIN_SUP_1},
+//                                           {"bitcoin", COIN_CAP_2, COIN_SUP_2},
+//                                              {"etherium", COIN_CAP_3, COIN_SUP_3},
+//                                                 {"dogecoin", COIN_CAP_4, COIN_SUP_4},
+//                                                    {"ravencoin", COIN_CAP_5, COIN_SUP_5},
+//                                                       {"dodo", COIN_CAP_6, COIN_SUP_6}
+//                                 }, {0, 0, 0, 0, 0, 0, 0}};
+//    user new_user {user_balance, INITIAL_BALANCE, 0};
+//    return 0;
+//}

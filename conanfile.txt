@@ -1,0 +1,6 @@
+[requires]
+fmt/7.1.2
+doxygen/1.8.20
+
+[generators]
+cmake
