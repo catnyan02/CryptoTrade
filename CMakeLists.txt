@@ -36,13 +36,17 @@ conan_cmake_run(
         CONAN_CMAKE_PROGRAM="${CMAKE_COMMAND}"
         ${ENV})
 
-#set(DOXYGEN_GENERATE_XML YES)
-#set(DOXYGEN_GENERATE_TREEVIEW YES)
-#set(DOXYGEN_SOURCE_BROWSER YES)
-#set(DOXYGEN_INLINE_SOURCES YES)
-#set(DOXYGEN_HTML_EXTRA_STYLESHEET doxygen-awesome.css)
-#find_package(Doxygen)
-#doxygen_add_docs(Doxygen src)
+# for    gtkmm       !!!!!
+#find_package(PkgConfig)
+
+#pkg_check_modules(GTKMM gtkmm-2.4) # look into FindPkgConfig.cmake,
+# it contains documentation
+# Now the variables GTKMM_INCLUDE_DIRS, GTKMM_LIBRARY_DIRS and GTKMM_LIBRARIES
+# contain what you expect
+
+#add_subdirectory(src_dir)
+
+
 
 enable_testing()
 add_subdirectory(external/doctest)
