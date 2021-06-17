@@ -4,5 +4,3 @@ enable_testing()
 add_subdirectory(external/doctest)
 include(external/doctest/doctest.cmake)
 add_subdirectory(src)
-
-# for    gtkmm       !!!!!

@@ -24,15 +24,15 @@
 #include "ftxui/screen/color.hpp" // for Color, Color::BlueLight, Color::RedLight, Color::Black, Color::Blue, Color::Cyan, Color::CyanLight, Color::GrayDark, Color::GrayLight, Color::Green, Color::GreenLight, Color::Magenta, Color::MagentaLight, Color::Red, Color::White, Color::Yellow, Color::YellowLight, Color::Default
 
 int main(int argc, char *argv[]) {
-    crypto_balance user_balance{{{"krsch_coin", COIN_CAP_0, COIN_SUP_0},
-                                 {"kzmnv_coin", COIN_CAP_1, COIN_SUP_1},
-                                 {"bitcoin", COIN_CAP_2, COIN_SUP_2},
-                                 {"etherium", COIN_CAP_3, COIN_SUP_3},
-                                 {"dogecoin", COIN_CAP_4, COIN_SUP_4},
-                                 {"ravencoin", COIN_CAP_5, COIN_SUP_5},
-                                 {"dodo", COIN_CAP_6, COIN_SUP_6}},
+    crypto_balance user_balance{{{"krsch_coin", 245125425.75, 24512},
+                                 {"kzmnv_coin", 547241254.6, 745224},
+                                 {"bitcoin", 668500347021.10, 18733637},
+                                 {"etherium", 274003657734.54, 116269232},
+                                 {"dogecoin", 40488480660.85, 130007902538},
+                                 {"ravencoin", 648753313.34, 8981290000},
+                                 {"dodo", 137155221.42, 110551965}},
                                 {0, 0, 0, 0, 0, 0, 0}};
-    user new_user{user_balance, INITIAL_BALANCE, 0};
+    user new_user{user_balance, 1000000, 0};
     new_user.wallet.init_fluctuations();
     auto the_end = false;
 
