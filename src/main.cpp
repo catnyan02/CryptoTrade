@@ -249,8 +249,18 @@ int main(int argc, char *argv[]) {
         Container::Vertical({rates}),
     });
 
-    // auto coin_data_component = Container::Horizontal(
-    // );
+    auto trading_buttons = Container::Horizontal({
+        Button("Buy",
+               [&] {
+                   new_user.add_coins(coin_selected,
+                                      std::stof(amount_content_));
+               }),
+        Button("Withdraw",
+               [&] {
+                   new_user.withdraw_coins(coin_selected,
+                                           std::stof(amount_content_));
+               }),
+    });
 
     auto trading_component = Container::Horizontal({
         trading,
@@ -261,6 +271,7 @@ int main(int argc, char *argv[]) {
                 input_add,
                 input,
             }),
+            trading_buttons,
         }),
     });
 
@@ -289,28 +300,13 @@ int main(int argc, char *argv[]) {
         return line;
     };
 
-    auto trading_buttons = Container::Horizontal({
-        Button("Buy", [&] { new_user.; }),
-        Button("Withdraw",
-               [&] {
-                   new_user.withdraw_coins(coin_selected,
-                                           float(amount_content_));
-               }),
-    });
-
-    auto game_over = window(
-        text(L"Game Over"),
-        vbox({
-            text(L"Days passed: " + to_wstring(new_user.day + 1)),
-            text(L"Total profit: " + to_wstring(new_user.end_of_the_week()[1])),
-            text(L"Score: " + to_wstring(new_user.end_of_the_week()[2])),
-        }));
-
     auto trading_renderer = Renderer(trading_component, [&] {
         auto trading_win =
             window(text(L"Trading mode"), trading->Render() | frame);
         auto coins_win = window(text(L"Coins"), coins->Render());
         auto amount_win = window(text(L"Amount:"), amount_->Render());
+        auto buttons_win =
+            window(text(L"Choose action"), trading_buttons->Render());
         auto input_win =
             window(text(L"Input"),
                    hbox({
@@ -332,7 +328,9 @@ int main(int argc, char *argv[]) {
                            coins_win,
                            vbox({
                                amount_win | size(WIDTH, EQUAL, 20),
-                               input_win | size(WIDTH, EQUAL, 60),
+                           }),
+                           vbox({
+                               buttons_win | size(WIDTH, EQUAL, 60),
                            }),
                            filler(),
                        }),
@@ -341,7 +339,14 @@ int main(int argc, char *argv[]) {
                    flex_grow | border;
         };
         return vbox({
-            game_over,
+            window(text(L"Game Over"),
+                   vbox({
+                       text(L"Days passed: " + to_wstring(new_user.day + 1)),
+                       text(L"Total profit: " +
+                            to_wstring(new_user.end_of_the_week()[1])),
+                       text(L"Score: " +
+                            to_wstring(new_user.end_of_the_week()[2])),
+                   })),
         });
     });
 
@@ -387,7 +392,14 @@ int main(int argc, char *argv[]) {
                    flex_grow | border;
         };
         return vbox({
-            game_over,
+            window(text(L"Game Over"),
+                   vbox({
+                       text(L"Days passed: " + to_wstring(new_user.day + 1)),
+                       text(L"Total profit: " +
+                            to_wstring(new_user.end_of_the_week()[1])),
+                       text(L"Score: " +
+                            to_wstring(new_user.end_of_the_week()[2])),
+                   })),
         });
     });
 
@@ -440,7 +452,14 @@ int main(int argc, char *argv[]) {
                    flex_grow | border;
         };
         return vbox({
-            game_over,
+            window(text(L"Game Over"),
+                   vbox({
+                       text(L"Days passed: " + to_wstring(new_user.day + 1)),
+                       text(L"Total profit: " +
+                            to_wstring(new_user.end_of_the_week()[1])),
+                       text(L"Score: " +
+                            to_wstring(new_user.end_of_the_week()[2])),
+                   })),
         });
     });
 
@@ -467,7 +486,7 @@ int main(int argc, char *argv[]) {
 
     auto main_renderer = Renderer(main_container, [&] {
         return vbox({
-            text(L"CryptoTrade day " + to_wstring(new_user.day)) | bold |
+            text(L"CryptoTrade day " + to_wstring(new_user.day + 1)) | bold |
                 hcenter,
             tab_selection->Render() | hcenter,
             tab_content->Render() | flex,
