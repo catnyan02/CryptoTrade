@@ -72,6 +72,18 @@ auto crypto_currency::init_fluctuations() -> bool {
     return daily_values.size() == 7;
 }
 
+auto crypto_balance::init_fluctuations() -> void {
+    for (int i=0; i < coins.size(); i++){
+        coins[i].init_fluctuations();
+    }
+}
+
+auto crypto_balance::daily_fluctuations() -> void {
+    for (int i=0; i < coins.size(); i++){
+        coins[i].daily_fluctuations();
+    }
+}
+
 auto crypto_balance::coin_name(unsigned int coin_number) -> std::string {
     if (coin_number < coins.size()) {
         return coins[coin_number].coin_name;
@@ -181,6 +193,7 @@ int main(int argc, char *argv[]) {
                                  {"dodo", COIN_CAP_6, COIN_SUP_6}},
                                 {0, 0, 0, 0, 0, 0, 0}};
     user new_user{user_balance, INITIAL_BALANCE, 0};
+    new_user.wallet.init_fluctuations();
     using namespace ftxui;
 
     std::vector<std::wstring> coins_label = {

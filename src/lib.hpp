@@ -33,7 +33,12 @@ struct crypto_balance {
         coins; ///< vector with coins that you want to add to the wallet
     std::vector<float> balance_by_coin; ///< vector with number of respective
                                         ///< coins that user currently has
-
+    auto init_fluctuations()
+        -> void; ///< creates daily_values for 6 days prior to gameplay and for
+                 ///< the first day of the gameplay for all coins
+    auto daily_fluctuations()
+        -> void; ///< randomly changes market capitalization and circulating
+                 ///< supply of all coins
     auto coin_name(unsigned int coin_number)
         -> std::string; ///< looks up the name of the coin by its index in
                         ///< balance_by_coin
