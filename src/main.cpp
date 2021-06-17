@@ -296,7 +296,7 @@ int main(int argc, char *argv[]) {
     auto game_over = window(
         text(L"Game Over"),
         vbox({
-            text(L"Days passed: " + to_wstring(new_user.end_of_the_week()[0])),
+            text(L"Days passed: " + to_wstring(new_user.day + 1)),
             text(L"Total profit: " + to_wstring(new_user.end_of_the_week()[1])),
             text(L"Score: " + to_wstring(new_user.end_of_the_week()[2])),
         }));
