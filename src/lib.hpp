@@ -20,8 +20,7 @@ struct crypto_currency {
     auto count_value() -> float;           ///< returns current value of a coin
     auto update_values(float val) -> void; ///< adds value to daily_values
     auto init_fluctuations()
-        -> bool; ///< creates daily_values for 6 days prior to gameplay and for
-                 ///< the first day of the gameplay
+        -> bool; ///< creates daily_values for 7 days of the gameplay
 };
 
 /// Crypto Wallet
@@ -34,8 +33,7 @@ struct crypto_balance {
     std::vector<float> balance_by_coin; ///< vector with number of respective
                                         ///< coins that user currently has
     auto init_fluctuations()
-        -> void; ///< creates daily_values for 6 days prior to gameplay and for
-                 ///< the first day of the gameplay for all coins
+        -> void; ///< creates daily_values for 7 days of the gameplay
     auto daily_fluctuations()
         -> void; ///< randomly changes market capitalization and circulating
                  ///< supply of all coins
