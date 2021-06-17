@@ -5,6 +5,7 @@
 #include <cmath>  // for sin
 #include <cstdarg>
 #include <experimental/random>
+#include <ftxui/screen/string.hpp>
 #include <functional> // for ref, reference_wrapper, function
 #include <iostream>
 #include <memory>  // for allocator, shared_ptr, __shared_ptr_access
@@ -73,13 +74,13 @@ auto crypto_currency::init_fluctuations() -> bool {
 }
 
 auto crypto_balance::init_fluctuations() -> void {
-    for (int i=0; i < coins.size(); i++){
+    for (int i = 0; i < coins.size(); i++) {
         coins[i].init_fluctuations();
     }
 }
 
 auto crypto_balance::daily_fluctuations() -> void {
-    for (int i=0; i < coins.size(); i++){
+    for (int i = 0; i < coins.size(); i++) {
         coins[i].daily_fluctuations();
     }
 }
@@ -356,13 +357,14 @@ int main(int argc, char *argv[]) {
                        }),
                        filler(),
                    }),
-                   hflow(render_command()) | flex_grow,
+                   //    hflow(render_command()) | flex_grow,
                }) |
                flex_grow | border;
     });
 
     auto profile_renderer = Renderer([&] {
         auto balance_labels = vbox({
+            text(L"USD"),
             text(coins_label[0]),
             text(coins_label[1]),
             text(coins_label[2]),
@@ -372,7 +374,14 @@ int main(int argc, char *argv[]) {
             text(coins_label[6]),
         });
         auto balances = vbox({
-
+            text(to_wstring(new_user.balance)),
+            text(to_wstring(new_user.wallet.balance_by_coin[0])),
+            text(to_wstring(new_user.wallet.balance_by_coin[1])),
+            text(to_wstring(new_user.wallet.balance_by_coin[2])),
+            text(to_wstring(new_user.wallet.balance_by_coin[3])),
+            text(to_wstring(new_user.wallet.balance_by_coin[4])),
+            text(to_wstring(new_user.wallet.balance_by_coin[5])),
+            text(to_wstring(new_user.wallet.balance_by_coin[6])),
         });
         return vbox({
                    hbox({
@@ -380,14 +389,14 @@ int main(int argc, char *argv[]) {
                            balance_labels | size(WIDTH, EQUAL, 50),
                        }),
                        vbox({
-
+                           balances | size(WIDTH, EQUAL, 50),
                        }),
                        //    vbox({
                        //        rates | size(WIDTH, EQUAL, 50),
                        //    }),
                        filler(),
                    }),
-                   hflow(render_command()) | flex_grow,
+                   //    hflow(render_command()) | flex_grow,
                }) |
                flex_grow | border;
     });
@@ -395,7 +404,7 @@ int main(int argc, char *argv[]) {
     int tab_index = 0;
     std::vector<std::wstring> tab_entries = {
         L"trade",
-        L"coin data",
+        L"coin rates",
         L"profile",
     };
     auto tab_selection = Toggle(&tab_entries, &tab_index);
