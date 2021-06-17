@@ -289,8 +289,12 @@ int main(int argc, char *argv[]) {
     };
 
     auto trading_buttons = Container::Horizontal({
-        Button("Buy", [&] { new_user.next_day(); }),
-        Button("Withdraw", [&] { the_end = true; }),
+        Button("Buy", [&] { new_user.; }),
+        Button("Withdraw",
+               [&] {
+                   new_user.withdraw_coins(coin_selected,
+                                           float(amount_content_));
+               }),
     });
 
     auto game_over = window(
