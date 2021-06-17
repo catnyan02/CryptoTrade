@@ -290,9 +290,13 @@ int main(int argc, char *argv[]) {
         return line;
     };
 
-    auto game_over = window(text(L"Game Over"), vbox({
-                                                    text(L"gay"),
-                                                }));
+    auto game_over = window(
+        text(L"Game Over"),
+        vbox({
+            text(L"Days passed: " + to_wstring(new_user.end_of_the_week()[0])),
+            text(L"Total profit: " + to_wstring(new_user.end_of_the_week()[1])),
+            text(L"Score: " + to_wstring(new_user.end_of_the_week()[2])),
+        }));
 
     auto trading_renderer = Renderer(trading_component, [&] {
         auto trading_win =
