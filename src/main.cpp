@@ -462,7 +462,8 @@ int main(int argc, char *argv[]) {
 
     auto main_renderer = Renderer(main_container, [&] {
         return vbox({
-            text(L"CryptoTrade") | bold | hcenter,
+            text(L"CryptoTrade day " + to_wstring(new_user.day)) | bold |
+                hcenter,
             tab_selection->Render() | hcenter,
             tab_content->Render() | flex,
         });
