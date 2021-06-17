@@ -2,6 +2,22 @@
 #include <string>
 #include <vector>
 
+static const float INITIAL_BALANCE = 1000000;
+static const double COIN_CAP_0 = 245125425.75;
+static const double COIN_CAP_1 = 547241254.67;
+static const double COIN_CAP_2 = 668500347021.10;
+static const double COIN_CAP_3 = 274003657734.54;
+static const double COIN_CAP_4 = 40488480660.85;
+static const double COIN_CAP_5 = 648753313.34;
+static const double COIN_CAP_6 = 137155221.42;
+static const double COIN_SUP_0 = 24512;
+static const double COIN_SUP_1 = 745224;
+static const double COIN_SUP_2 = 18733637;
+static const double COIN_SUP_3 = 116269232;
+static const double COIN_SUP_4 = 130007902538;
+static const double COIN_SUP_5 = 8981290000;
+static const double COIN_SUP_6 = 110551965;
+
 /// Crypto Currency
 /**
  * Creates crypto coin. Coin stores its name and parameters that account for
