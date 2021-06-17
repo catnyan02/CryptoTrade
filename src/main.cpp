@@ -290,6 +290,11 @@ int main(int argc, char *argv[]) {
         return line;
     };
 
+    auto trading_buttons = Container::Horizontal({
+        Button("Buy", [&] { new_user.next_day(); }),
+        Button("Withdraw", [&] { the_end = true; }),
+    });
+
     auto game_over = window(
         text(L"Game Over"),
         vbox({
@@ -383,12 +388,12 @@ int main(int argc, char *argv[]) {
         });
     });
 
-    auto buttons = Container::Horizontal({
+    auto profile_buttons = Container::Horizontal({
         Button("Next day", [&] { new_user.next_day(); }),
         Button("End Game", [&] { the_end = true; }),
     });
 
-    auto profile_renderer = Renderer(buttons, [&] {
+    auto profile_renderer = Renderer(profile_buttons, [&] {
         auto balance_labels = vbox({
             text(L"USD"),
             text(coins_label[0]),
@@ -425,7 +430,7 @@ int main(int argc, char *argv[]) {
                            filler(),
                        }),
                        hbox({
-                           buttons->Render(),
+                           profile_buttons->Render(),
                        }),
                        //    hflow(render_command()) | flex_grow,
                    }) |
