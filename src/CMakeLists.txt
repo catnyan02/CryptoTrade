@@ -25,13 +25,12 @@ add_executable(proj_test test.cpp lib.cpp)
 add_executable(proj main.cpp lib.cpp)
 target_link_libraries(proj_test PUBLIC doctest::doctest)
 target_link_libraries(proj
-  PRIVATE ftxui::screen
-  PRIVATE ftxui::dom
-  PRIVATE ftxui::component # Not needed for this example.
+  PUBLIC ftxui::component
 )
 target_link_libraries(proj PUBLIC doctest::doctest)
 doctest_discover_tests(proj_test)
-
+set_property(TARGET proj PROPERTY CXX_STANDARD 17)
+set_property(TARGET proj_test PROPERTY CXX_STANDARD 17)
 # include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
 # auto_tester(src main.cpp test.cpp)
 
