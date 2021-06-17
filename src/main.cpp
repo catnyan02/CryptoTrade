@@ -308,7 +308,22 @@ int main(int argc, char *argv[]) {
     });
 
     auto coin_data_renderer = Renderer([&] {
-        auto rates = vbox({});
+        auto rates = vbox({
+            text(to_wstring(
+                new_user.wallet.coins[0].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[1].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[2].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[3].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[4].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[5].daily_values[new_user.day])),
+            text(to_wstring(
+                new_user.wallet.coins[6].daily_values[new_user.day])),
+        });
         auto coin_names = vbox({
             text(coins_label[0]),
             text(coins_label[1]),
@@ -333,6 +348,37 @@ int main(int argc, char *argv[]) {
                flex_grow | border;
     });
 
+    auto profile_renderer = Renderer([&] {
+        auto balance_labels = vbox({
+            text(coins_label[0]),
+            text(coins_label[1]),
+            text(coins_label[2]),
+            text(coins_label[3]),
+            text(coins_label[4]),
+            text(coins_label[5]),
+            text(coins_label[6]),
+        });
+        auto balances = vbox({
+
+        });
+        return vbox({
+                   hbox({
+                       vbox({
+                           balance_labels | size(WIDTH, EQUAL, 50),
+                       }),
+                       vbox({
+
+                       }),
+                       //    vbox({
+                       //        rates | size(WIDTH, EQUAL, 50),
+                       //    }),
+                       filler(),
+                   }),
+                   hflow(render_command()) | flex_grow,
+               }) |
+               flex_grow | border;
+    });
+
     int tab_index = 0;
     std::vector<std::wstring> tab_entries = {
         L"trade",
@@ -344,6 +390,7 @@ int main(int argc, char *argv[]) {
         {
             trading_renderer,
             coin_data_renderer,
+            profile_renderer,
 
         },
         &tab_index);
