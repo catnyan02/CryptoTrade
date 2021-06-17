@@ -5,6 +5,7 @@
 #include <cmath>  // for sin
 #include <cstdarg>
 #include <experimental/random>
+#include <ftxui/screen/screen.hpp>
 #include <ftxui/screen/string.hpp>
 #include <functional> // for ref, reference_wrapper, function
 #include <iostream>
@@ -195,6 +196,8 @@ int main(int argc, char *argv[]) {
                                 {0, 0, 0, 0, 0, 0, 0}};
     user new_user{user_balance, INITIAL_BALANCE, 0};
     new_user.wallet.init_fluctuations();
+    auto the_end = false;
+
     using namespace ftxui;
 
     std::vector<std::wstring> coins_label = {
@@ -287,6 +290,10 @@ int main(int argc, char *argv[]) {
         return line;
     };
 
+    auto game_over = window(text(L"Game Over"), vbox({
+                                                    text(L"gay"),
+                                                }));
+
     auto trading_renderer = Renderer(trading_component, [&] {
         auto trading_win =
             window(text(L"Trading mode"), trading->Render() | frame);
@@ -306,19 +313,24 @@ int main(int argc, char *argv[]) {
                        separator(),
                        input->Render() | frame | size(HEIGHT, EQUAL, 3) | flex,
                    }));
-        return vbox({
-                   hbox({
-                       trading_win | size(HEIGHT, LESS_THAN, 6),
-                       coins_win,
-                       vbox({
-                           amount_win | size(WIDTH, EQUAL, 20),
-                           input_win | size(WIDTH, EQUAL, 60),
+        if (!the_end) {
+            return vbox({
+                       hbox({
+                           trading_win | size(HEIGHT, LESS_THAN, 6),
+                           coins_win,
+                           vbox({
+                               amount_win | size(WIDTH, EQUAL, 20),
+                               input_win | size(WIDTH, EQUAL, 60),
+                           }),
+                           filler(),
                        }),
-                       filler(),
-                   }),
-                   hflow(render_command()) | flex_grow,
-               }) |
-               flex_grow | border;
+                       hflow(render_command()) | flex_grow,
+                   }) |
+                   flex_grow | border;
+        };
+        return vbox({
+            game_over,
+        });
     });
 
     auto coin_data_renderer = Renderer([&] {
@@ -347,22 +359,32 @@ int main(int argc, char *argv[]) {
             text(coins_label[5]),
             text(coins_label[6]),
         });
+        if (!the_end) {
+            return vbox({
+                       hbox({
+                           vbox({
+                               coin_names | size(WIDTH, EQUAL, 50),
+                           }),
+                           vbox({
+                               rates | size(WIDTH, EQUAL, 50),
+                           }),
+                           filler(),
+                       }),
+                       //    hflow(render_command()) | flex_grow,
+                   }) |
+                   flex_grow | border;
+        };
         return vbox({
-                   hbox({
-                       vbox({
-                           coin_names | size(WIDTH, EQUAL, 50),
-                       }),
-                       vbox({
-                           rates | size(WIDTH, EQUAL, 50),
-                       }),
-                       filler(),
-                   }),
-                   //    hflow(render_command()) | flex_grow,
-               }) |
-               flex_grow | border;
+            game_over,
+        });
     });
 
-    auto profile_renderer = Renderer([&] {
+    auto buttons = Container::Horizontal({
+        Button("Next day", [&] { new_user.next_day(); }),
+        Button("End Game", [&] { the_end = true; }),
+    });
+
+    auto profile_renderer = Renderer(buttons, [&] {
         auto balance_labels = vbox({
             text(L"USD"),
             text(coins_label[0]),
@@ -383,22 +405,31 @@ int main(int argc, char *argv[]) {
             text(to_wstring(new_user.wallet.balance_by_coin[5])),
             text(to_wstring(new_user.wallet.balance_by_coin[6])),
         });
+
+        if (!the_end) {
+            return vbox({
+                       hbox({
+                           vbox({
+                               balance_labels | size(WIDTH, EQUAL, 50),
+                           }),
+                           vbox({
+                               balances | size(WIDTH, EQUAL, 50),
+                           }),
+                           //    vbox({
+                           //        rates | size(WIDTH, EQUAL, 50),
+                           //    }),
+                           filler(),
+                       }),
+                       hbox({
+                           buttons->Render(),
+                       }),
+                       //    hflow(render_command()) | flex_grow,
+                   }) |
+                   flex_grow | border;
+        };
         return vbox({
-                   hbox({
-                       vbox({
-                           balance_labels | size(WIDTH, EQUAL, 50),
-                       }),
-                       vbox({
-                           balances | size(WIDTH, EQUAL, 50),
-                       }),
-                       //    vbox({
-                       //        rates | size(WIDTH, EQUAL, 50),
-                       //    }),
-                       filler(),
-                   }),
-                   //    hflow(render_command()) | flex_grow,
-               }) |
-               flex_grow | border;
+            game_over,
+        });
     });
 
     int tab_index = 0;
