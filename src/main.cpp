@@ -44,10 +44,10 @@ double COIN_SUP_6 = 110551965;
 
 auto crypto_currency::daily_fluctuations() -> bool {
     std::experimental::reseed();
-    int range_max_cap = static_cast<int>(market_cap * 0.01);
-    std::experimental::reseed();
-    int range_max_sup = static_cast<int>(circulating_sup * 0.01);
+    int range_max_cap = static_cast<int>(market_cap * 0.0001);
+    int range_max_sup = static_cast<int>(circulating_sup);
     int random_cap = std::experimental::randint(0, range_max_cap);
+    std::experimental::reseed();
     int random_sup = std::experimental::randint(0, range_max_sup);
     market_cap += random_cap;
     circulating_sup += random_sup;
