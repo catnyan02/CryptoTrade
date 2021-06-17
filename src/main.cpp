@@ -290,14 +290,18 @@ int main(int argc, char *argv[]) {
     };
 
     auto trading_buttons = Container::Horizontal({
-        Button("Buy", [&] { new_user.next_day(); }),
-        Button("Withdraw", [&] { the_end = true; }),
+        Button("Buy", [&] { new_user.; }),
+        Button("Withdraw",
+               [&] {
+                   new_user.withdraw_coins(coin_selected,
+                                           float(amount_content_));
+               }),
     });
 
     auto game_over = window(
         text(L"Game Over"),
         vbox({
-            text(L"Days passed: " + to_wstring(new_user.end_of_the_week()[0])),
+            text(L"Days passed: " + to_wstring(new_user.day + 1)),
             text(L"Total profit: " + to_wstring(new_user.end_of_the_week()[1])),
             text(L"Score: " + to_wstring(new_user.end_of_the_week()[2])),
         }));
@@ -463,7 +467,8 @@ int main(int argc, char *argv[]) {
 
     auto main_renderer = Renderer(main_container, [&] {
         return vbox({
-            text(L"CryptoTrade") | bold | hcenter,
+            text(L"CryptoTrade day " + to_wstring(new_user.day)) | bold |
+                hcenter,
             tab_selection->Render() | hcenter,
             tab_content->Render() | flex,
         });
